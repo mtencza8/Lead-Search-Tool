@@ -4,7 +4,20 @@ import json
 from typing import cast
 
 
-apiKey = "1034312374IgW21S6zGJN0eAnOOLeIKTGgYaYS0SVI"
+
+with open("info.config") as f:
+    contents = f.readlines()
+
+for i in contents:
+    if "skrappApiKey" in i:
+        apiKey = i
+        index = apiKey.index(":")
+        apiKey = apiKey[index+1:].strip()
+
+
+
+
+
 headers = {}
 headers['X-Access-Key'] = apiKey
 headers['content-type'] = 'application/JSON'
@@ -101,7 +114,7 @@ def parseList(leadDict):
 
 id = '4950966'
 
-listLeads(id)
+
     
 
 

@@ -4,13 +4,29 @@ from email.message import EmailMessage
 import simple_salesforce as ssf
 
 
+with open("info.config") as f:
+    contents = f.readlines()
+
+for i in contents:
+    print(i)
+    if "username" in i:
+        username = i
+        index = username.index(":")
+        username = username[index+1:].strip()
+    if "password" in i:
+        password = i
+        index = password.index(":")
+        password = password[index+1:].strip()
+
+
+
+
+
 
 
 def sendEmail(fname, email):
     try:
 
-        user="mtencza@ueidaq.com"
-        password = '3Rusf0608'
         smtpsrv = "smtp.office365.com"
         smtpserver = smtplib.SMTP(smtpsrv,587)
         msg = EmailMessage()
@@ -28,7 +44,7 @@ def sendEmail(fname, email):
         ).format(fname)
 
         smtpserver.starttls()
-        smtpserver.login(user, password)
+        smtpserver.login(username, password)
         smtpserver.send_message (msg)
         smtpserver.close()
         
